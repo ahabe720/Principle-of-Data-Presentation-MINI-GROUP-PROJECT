@@ -1,4 +1,4 @@
-
+# imports
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -54,6 +54,89 @@ def cor_func(df1, df2, idx1, idx2, first_year, second_year):
 
     return print('The beta is', beta)
 
+
+def describe_dataframe(name):
+    w = name.describe()
+    print(w)
+
+
+# The boxplots as a function
+
+
+def boxplot_function(data, plots_no, ylim, country_name):
+    """
+    Function to create a series of boxplots using subplot through Pandas series 
+    data put into an array and the names of the countries from the pandas 
+    series put into an array with the same number of elements in both arrays as
+    well as the plots_no.
+
+    Parameters
+    ----------
+    data : array
+        The data in a form of an array with the same number of pandas series 
+        with the plot_no.
+    plots_no : integer
+        The number of boxplots to be generated.
+    ylim : array
+        The minumun and maximum values of the yaxis in an array containing two 
+        integers.
+    country_name : string
+        the name of  the country to be used as a label.
+
+    Returns
+    -------
+    Subplot of Boxplots.
+
+    """
+
+    plt.figure(figsize=(20, 6))
+    for i in range(plots_no):
+        plt.subplot(1, plots_no, i+1)
+        plt.boxplot(data[i])
+        plt.ylim(ylim)
+        # remove the code above to have perfect readable boxplots, and remove
+        # ylim variable in the function definition
+        plt.xlabel(country_name[i])
+        plt.grid()
+
+    plt.show()
+
+
+# The boxplots as a functionwith no y limit
+
+
+def boxplot_function_No_Y(data, plots_no, country_name):
+    """
+    Function to create a series of boxplots using subplot through Pandas series 
+    data put into an array and the names of the countries from the pandas 
+    series put into an array with the same number of elements in both arrays as
+    well as the plots_no.
+
+    Parameters
+    ----------
+    data : array
+        The data in a form of an array with the same number of pandas series 
+        with the plot_no.
+    plots_no : integer
+        The number of boxplots to be generated.
+    country_name : string
+        the name of  the country to be used as a label.
+
+    Returns
+    -------
+    Subplot of Boxplots.
+
+    """
+
+    plt.figure(figsize=(20, 6))
+    for i in range(plots_no):
+        plt.subplot(1, plots_no, i+1)
+        plt.boxplot(data[i])
+        plt.xlabel(country_name[i])
+        plt.grid()
+
+    plt.show()
+
 # %% GDP reading and plotting
 
 
@@ -67,10 +150,10 @@ print(GBR_GDP)
 
 
 plt.figure()
-plt.plot(GBR_GDP, color="Green", label="United Kingdom")
-plt.plot(MWI_GDP, color='Red', label="Malawi")
-plt.plot(ZAF_GDP, color="goldenrod", label="South Africa")
-plt.plot(WRL_GDP, color="Black", label="World")
+plt.plot(GBR_GDP.loc[1990:2024], color="Green", label="United Kingdom")
+plt.plot(MWI_GDP.loc[1990:2024], color='Red', label="Malawi")
+plt.plot(ZAF_GDP.loc[1990:2024], color="goldenrod", label="South Africa")
+plt.plot(WRL_GDP.loc[1990:2024], color="Black", label="World")
 plt.yscale("log")
 # plt.xticks([0,10,20,30])
 plt.grid()
@@ -80,10 +163,10 @@ plt.legend(loc='upper left')
 plt.title("GDP per capita over time")
 
 plt.figure()
-plt.plot(GBR_GDP, color="Green", label="United Kingdom")
-plt.plot(MWI_GDP, color='Red', label="Malawi")
-plt.plot(ZAF_GDP, color="goldenrod", label="South Africa")
-plt.plot(WRL_GDP, color="Black", label="World")
+plt.plot(GBR_GDP.loc[1990:2024], color="Green", label="United Kingdom")
+plt.plot(MWI_GDP.loc[1990:2024], color='Red', label="Malawi")
+plt.plot(ZAF_GDP.loc[1990:2024], color="goldenrod", label="South Africa")
+plt.plot(WRL_GDP.loc[1990:2024], color="Black", label="World")
 # plt.yscale("log")
 # plt.xticks([0,10,20,30])
 plt.grid()
@@ -100,10 +183,10 @@ ZAF_ERGY = readcsv("per-capita-energy-use.csv", "South Africa", -1)
 WRL_ERGY = readcsv("per-capita-energy-use.csv", "World", -1)
 
 plt.figure()
-plt.plot(GBR_ERGY, color="Green", label="United Kingdom")
-plt.plot(MWI_ERGY, color='Red', label="Malawi")
-plt.plot(ZAF_ERGY, color="goldenrod", label="South Africa")
-plt.plot(WRL_ERGY, color="Black", label="World")
+plt.plot(GBR_ERGY.loc[1990:2024], color="Green", label="United Kingdom")
+plt.plot(MWI_ERGY.loc[1990:2024], color='Red', label="Malawi")
+plt.plot(ZAF_ERGY.loc[1990:2024], color="goldenrod", label="South Africa")
+plt.plot(WRL_ERGY.loc[1990:2024], color="Black", label="World")
 plt.yscale("log")
 # plt.xticks([0,10,20,30])
 plt.grid()
@@ -113,10 +196,10 @@ plt.legend(loc='upper left')
 plt.title("Energy use per capita over time")
 
 plt.figure()
-plt.plot(GBR_ERGY, color="Green", label="United Kingdom")
-plt.plot(MWI_ERGY, color='Red', label="Malawi")
-plt.plot(ZAF_ERGY, color="goldenrod", label="South Africa")
-plt.plot(WRL_ERGY, color="Black", label="World")
+plt.plot(GBR_ERGY.loc[1990:2024], color="Green", label="United Kingdom")
+plt.plot(MWI_ERGY.loc[1990:2024], color='Red', label="Malawi")
+plt.plot(ZAF_ERGY.loc[1990:2024], color="goldenrod", label="South Africa")
+plt.plot(WRL_ERGY.loc[1990:2024], color="Black", label="World")
 # plt.yscale("log")
 # plt.xticks([0,10,20,30])
 plt.grid()
@@ -133,10 +216,10 @@ ZAF_INFL = readcsv("inflation-of-consumer-prices.csv", "South Africa", -1)
 WRL_INFL = readcsv("inflation-of-consumer-prices.csv", "World", -1)
 
 plt.figure()
-plt.plot(GBR_INFL, color="Green", label="United Kingdom")
-plt.plot(MWI_INFL, color='Red', label="Malawi")
-plt.plot(ZAF_INFL, color="goldenrod", label="South Africa")
-plt.plot(WRL_INFL, color="Black", label="World")
+plt.plot(GBR_INFL.loc[1990:2024], color="Green", label="United Kingdom")
+plt.plot(MWI_INFL.loc[1990:2024], color='Red', label="Malawi")
+plt.plot(ZAF_INFL.loc[1990:2024], color="goldenrod", label="South Africa")
+plt.plot(WRL_INFL.loc[1990:2024], color="Black", label="World")
 plt.yscale("log")
 # plt.xticks([0,10,20,30])
 plt.grid()
@@ -146,10 +229,10 @@ plt.legend(loc='upper left')
 plt.title("Inflation of consumer products over time")
 
 plt.figure()
-plt.plot(GBR_INFL, color="Green", label="United Kingdom")
-plt.plot(MWI_INFL, color='Red', label="Malawi")
-plt.plot(ZAF_INFL, color="goldenrod", label="South Africa")
-plt.plot(WRL_INFL, color="Black", label="World")
+plt.plot(GBR_INFL.loc[1990:2024], color="Green", label="United Kingdom")
+plt.plot(MWI_INFL.loc[1990:2024], color='Red', label="Malawi")
+plt.plot(ZAF_INFL.loc[1990:2024], color="goldenrod", label="South Africa")
+plt.plot(WRL_INFL.loc[1990:2024], color="Black", label="World")
 # plt.yscale("log")
 # plt.xticks([0,10,20,30])
 plt.grid()
@@ -158,9 +241,41 @@ plt.xlabel("Years")
 plt.legend(loc='upper left')
 plt.title("Inflation of consumer products over time")
 
+# S.Africa experience deflation in 2004 so the graph attempts to go below zero
+
+# %% .describe() GDP
+print('For UK')
+stats_GBR_GDP = describe_dataframe(GBR_GDP)
+print('For Malawi')
+stats_MWI_GDP = describe_dataframe(MWI_GDP)
+print('For South Africa')
+stats_ZAF_GDP = describe_dataframe(ZAF_GDP)
+print('For World')
+stats_WRL_GDP = describe_dataframe(WRL_GDP)
+
+# %% .describe() Energy
+print('For UK')
+stats_GBR_ERGY = describe_dataframe(GBR_ERGY)
+print('For Malawi')
+stats_MWI_ERGY = describe_dataframe(MWI_ERGY)
+print('For South Africa')
+stats_ZAF_ERGY = describe_dataframe(ZAF_ERGY)
+print('For World')
+stats_WRL_ERGY = describe_dataframe(WRL_ERGY)
+
+# %% .describe() Inflation
+print('For UK')
+stats_GBR_INFL = describe_dataframe(GBR_INFL)
+print('For Malawi')
+stats_MWI_INFL = describe_dataframe(MWI_INFL)
+print('For South Africa')
+stats_ZAF_INFL = describe_dataframe(ZAF_INFL)
+print('For World')
+stats_WRL_INFL = describe_dataframe(WRL_INFL)
+
 # %% Rate of Change for GDP
 
-roc_func(AFG_GDP, 'GDP per capita', 1990, 2024)
+# roc_func(AFG_GDP, 'GDP per capita', 1990, 2024)
 
 roc_func(GBR_GDP, 'GDP per capita', 1990, 2024)
 
@@ -169,6 +284,30 @@ roc_func(MWI_GDP, 'GDP per capita', 1990, 2024)
 roc_func(ZAF_GDP, 'GDP per capita', 1990, 2024)
 
 roc_func(WRL_GDP, 'GDP per capita', 1990, 2024)
+
+# %% Rate of Change for Energy consumption
+
+# roc_func(AFG_ERGY, 'Per capita energy consumption', 1990, 2024)
+
+roc_func(GBR_ERGY, 'Per capita energy consumption', 1990, 2024)
+
+roc_func(MWI_ERGY, 'Per capita energy consumption', 1990, 2024)
+
+roc_func(ZAF_ERGY, 'Per capita energy consumption', 1990, 2024)
+
+roc_func(WRL_ERGY, 'Per capita energy consumption', 1990, 2024)
+
+# %% Rate of Change for Inflation
+
+# roc_func(AFG_INFL, 'Inflation consumer prices (annual %)', 1990, 2024)
+
+roc_func(GBR_INFL, 'Inflation consumer prices (annual %)', 1990, 2024)
+
+roc_func(MWI_INFL, 'Inflation consumer prices (annual %)', 1990, 2024)
+
+roc_func(ZAF_INFL, 'Inflation consumer prices (annual %)', 1990, 2024)
+
+roc_func(WRL_INFL, 'Inflation consumer prices (annual %)', 1990, 2024)
 
 # %% UK correlations
 print('GREAT BRITAIN')
@@ -207,3 +346,52 @@ cor_func(WRL_GDP, WRL_ERGY, 'GDP per capita',
 print('For Inflation')
 cor_func(WRL_GDP, WRL_INFL, 'GDP per capita',
          'Inflation consumer prices (annual %)', 1990, 2024)
+
+# %% GDP Boxplots
+
+data = [GBR_GDP, MWI_GDP, ZAF_GDP, WRL_GDP]
+countries = ["Great Britain", "Malawi", "South Africa", "World"]
+ylim = [0, 55000]
+
+boxplot_function(data, 4, ylim, countries)
+
+# %% Energy Boxplots
+
+data = [GBR_ERGY, MWI_ERGY, ZAF_ERGY, WRL_ERGY]
+countries = ["Great Britain", "Malawi", "South Africa", "World"]
+ylim = [0, 55000]
+
+boxplot_function(data, 4, ylim, countries)
+
+# %% Inflation Boxplots
+
+data = [GBR_INFL, MWI_INFL, ZAF_INFL, WRL_INFL]
+countries = ["Great Britain", "Malawi", "South Africa", "World"]
+ylim = [0, 100]
+
+boxplot_function(data, 4, ylim, countries)
+
+
+# %% GDP Boxplots no ylim
+
+data = [GBR_GDP, MWI_GDP, ZAF_GDP, WRL_GDP]
+countries = ["Great Britain", "Malawi", "South Africa", "World"]
+
+
+boxplot_function_No_Y(data, 4, countries)
+
+# %% Energy Boxplots no ylim
+
+data = [GBR_ERGY, MWI_ERGY, ZAF_ERGY, WRL_ERGY]
+countries = ["Great Britain", "Malawi", "South Africa", "World"]
+
+
+boxplot_function_No_Y(data, 4, countries)
+
+# %% Energy Boxplots no ylim
+
+data = [GBR_INFL, MWI_INFL, ZAF_INFL, WRL_INFL]
+countries = ["Great Britain", "Malawi", "South Africa", "World"]
+
+
+boxplot_function_No_Y(data, 4, countries)
